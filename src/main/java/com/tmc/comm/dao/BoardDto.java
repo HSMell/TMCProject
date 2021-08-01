@@ -5,7 +5,7 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class BoardDto {
+public class BoardDto extends CommonDto{
 	private String post_num;
 	private String board_num;
 	private String user_id;
@@ -17,7 +17,7 @@ public class BoardDto {
 	private String file_path;	
 	private String save_file_name;
 	private String original_file_name;
-	
+			
 	private List<String> list_file_path;
 	private List<String> list_save_file_name;
 	
@@ -98,5 +98,13 @@ public class BoardDto {
 	}
 	public void setUpdate_date(String update_date) {
 		this.update_date = update_date;
+	}
+	public static void setStartIndex(int startIndex) {
+		// TODO Auto-generated method stub
+		
+	}
+	public static void setCntPerPage(int pageSize) {
+		// TODO Auto-generated method stub
+		
 	}
 }
