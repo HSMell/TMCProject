@@ -24,6 +24,12 @@
 	<!-- 폰트  -->
 <script>
 $(document).ready(function(){
+	var data = $("#user_id").val();
+		
+	if(data == ''){
+		alert("로그인시 글 작성 가능합니다.");
+		location.replace('/notice_list');
+	}
 	
 	$('#btn_cancel').click(function(){
 		var result = confirm("작성한 내용이 저장되지 않습니다.");
@@ -156,6 +162,11 @@ formAction = function(){
 
 //유효성체크
 fnValidation = function(){
+	
+	if($('#user_id').val() == "") {
+		alert("글을 작성 하려면 로그인을 해주세요.");
+		return false;
+	}
 	
 	if($('#text_title').val() == "") {
 		alert("글 제목을 입력해 주세요.");

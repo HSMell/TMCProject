@@ -53,11 +53,32 @@
 			post_title like concat('%',#{post_title},'%') or post_content like concat('%',#{post_title},'%')
 	</select>
 	
+	<select id="search2" parameterType="com.tmc.comm.dao.BoardDto" resultType="com.tmc.comm.dao.BoardDto">
+		select 
+			concat(files.file_path, files.save_file_name) as file_path, 
+			files.save_file_name, 
+			files.original_file_name, 
+			post.post_num as post_num,
+            post.post_title as post_title,
+            post.update_date as update_date,
+            post.user_id as user_id
+		from 
+			tb_post as post
+		left join tb_files as files on post.post_num = files.post_num
+		where 
+			post.board_num = 'B0000001'
+			and post.is_used = 'Y'
+			order by post_num desc
+			post_title like concat('%',#{post_title},'%') or post_content like concat('%',#{post_title},'%')
+		limit
+			#{startIndex}, #{pageSize} 
+	</select>
+	
 	<select id="searchcnt" resultType="com.tmc.comm.dao.BoardDto">
 		select count(*) from tb_post where post_title like concat('%',#{post_title},'%') or post_content like concat('%',#{post_title},'%');
 	</select>
 	
-	<select id="boardList2" parameterType="com.tmc.comm.dao.BoardDto" resultType="com.tmc.comm.dao.BoardDto">
+	<select id="boardList2" parameterType="com.tmc.comm.dao.Pagination" resultType="com.tmc.comm.dao.BoardDto">
 		select 
 			concat(files.file_path, files.save_file_name) as file_path, 
 			files.save_file_name, 
@@ -75,6 +96,46 @@
 			order by post_num desc
 		limit
 			#{paginationInfo.firstRecordIndex}, #{recordsPerPage}
+	</select>
+	
+	<select id="boardList3" parameterType="com.tmc.comm.dao.BoardDto" resultType="com.tmc.comm.dao.BoardDto">
+		select 
+			concat(files.file_path, files.save_file_name) as file_path, 
+			files.save_file_name, 
+			files.original_file_name, 
+			post.post_num as post_num,
+            post.post_title as post_title,
+            post.update_date as update_date,
+            post.user_id as user_id
+		from 
+			tb_post as post
+		left join tb_files as files on post.post_num = files.post_num
+		where 
+			post.board_num = 'B0000001'
+			and post.is_used = 'Y'
+			order by post_num desc
+		limit
+			10,#{recordsPerPage}
+	</select>	
+	
+	<select id="boardList4" parameterType="com.tmc.comm.dao.Pagination" resultType="com.tmc.comm.dao.BoardDto">
+		select 
+			concat(files.file_path, files.save_file_name) as file_path, 
+			files.save_file_name, 
+			files.original_file_name, 
+			post.post_num as post_num,
+            post.post_title as post_title,
+            post.update_date as update_date,
+            post.user_id as user_id
+		from 
+			tb_post as post
+		left join tb_files as files on post.post_num = files.post_num
+		where 
+			post.board_num = 'B0000001'
+			and post.is_used = 'Y'
+			order by post_num desc
+		limit
+			#{startIndex}, #{pageSize} 
 	</select>
 	
 	<select id="selectBoardTotalCount" parameterType="com.tmc.comm.dao.BoardDto" resultType="_int">

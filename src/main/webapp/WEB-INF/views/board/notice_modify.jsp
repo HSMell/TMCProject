@@ -57,7 +57,7 @@ $(document).ready(function(){
 	//파일 현재 필드 숫자 totalCount랑 비교값
 	let fileCount = 0;
 	//해당 숫자를 수정하여 전체 업로드 갯수를 정한다.
-	const totalCount = 5;
+	const totalCount = 1;
 	//파일 현재 필드 크기 totalSize랑 비교값
 	let fileSize = 0;
 	//해당 숫자를 수정하여 전체 업로드 크기를 정한다.

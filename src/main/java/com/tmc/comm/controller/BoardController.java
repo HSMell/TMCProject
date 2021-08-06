@@ -56,14 +56,41 @@ public class BoardController {
 		BoardDto.setCntPerPage(pagination.getPageSize());
 	        // 전체리스트 출력
 		List<BoardDto> boardList = bService.getBoardList(params);
-	                
+		List<BoardDto> boardList2 = bDao.boardList4(pagination);
+				
 		model.addAttribute("boardList", boardList);
+		model.addAttribute("boardList2", boardList2);
 		model.addAttribute("listCnt", listCnt);
 	        
 		model.addAttribute("pagination", pagination);
 		
 		return "/board/notice_list";		
 	}			
+	
+	@RequestMapping(value = "/notice_list/2")
+	public String boardList2(
+			@ModelAttribute("BoardDto") BoardDto boardDto,
+			@ModelAttribute("parmas") BoardDto params,
+			@RequestParam(defaultValue="2") int curPage,
+			HttpServletRequest request,
+			Model model) throws Exception{
+		
+		int listCnt = bDao.selectBoardTotalCount(params);
+				
+		Pagination pagination = new Pagination(listCnt, curPage);
+		
+		BoardDto.setStartIndex(pagination.getStartIndex());
+		BoardDto.setCntPerPage(pagination.getPageSize());
+	        // 전체리스트 출력
+		List<BoardDto> boardList = bService.getBoardList2(params);
+				
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("listCnt", listCnt);
+	        
+		model.addAttribute("pagination", pagination);
+		
+		return "/board/notice_list";		
+	}		
 	
 	@RequestMapping(value = "/search")
 	public String search(Model model,HttpServletRequest req) {
@@ -72,30 +99,12 @@ public class BoardController {
 		List<BoardDto> isResult = bService.search(search_value);
 		
 		model.addAttribute("isResult", isResult);
-		
+		req.setAttribute("search_value", search_value);
 		return "/board/search_list";
 	}
-			
-//	@RequestMapping("/")
-//	 public String root(@ModelAttribute("parmas") BoardDto params,Model model) throws Exception {
-//		
-//		List<BoardDto> boardList = bService.boardList();
-//		model.addAttribute("boardList", boardList);	
-//		
-//		return "/board/notice_list";
-//	   }
-//	
-//	@RequestMapping("/notice_list")
-//	 public String root2(@ModelAttribute("parmas") BoardDto params, Model model) {
-//		
-//		List<BoardDto> boardList = bService.getBoardList(params);
-//		model.addAttribute("boardList", boardList);		
-//		
-//		return "/board/notice_list";
-//	   }
 	
 	 @RequestMapping("/notice_write")
-	   public String boardadd(HttpServletRequest req) {	               
+	   public String boardadd(HttpServletRequest req) {		 
 	         return "/board/notice_write";
 	   }  	
 	 

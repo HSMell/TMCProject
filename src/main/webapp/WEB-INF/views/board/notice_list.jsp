@@ -38,9 +38,11 @@ $(document).ready(function(){
 			return false;
 		}				
 	});
-	
-	
 });
+
+function fn_paging(curPage) {
+	location.href = "/notice_list?curPage=" + curPage;
+	}
 </script>
 <body>
 <header class="navbar   head_wrap  ">
@@ -87,7 +89,7 @@ creating a new future</div>
     </div>
     <img src="img/arrow_02.png"   class="ml-3"  alt="화살표" /> 
     </li> -->
-  <c:forEach var="data" items="${ boardList}" varStatus="num">
+  <c:forEach var="data" items="${ boardList2}" varStatus="num">
   	<!-- <li class="media border-bottom px-3 py-3 align-items-center ">
     <a href="#" class="d-block mr-3 "><i class="xi-info   xi-x pup_st"></i></a>
     <div class="media-body  ">
@@ -170,7 +172,12 @@ creating a new future</div>
 <ul class="pagination justify-content-center mt-4">
 	<li class="page-item">
 		<c:if test="${pagination.curRange ne 1 }">
-			<a class="page-link cgray01" href="#" aria-label="Previous">
+	        <a href="#" onClick="fn_paging(1)">[처음]</a> 
+	    </c:if>
+	</li>
+	<li class="page-item">
+		<c:if test="${pagination.curRange ne 1 }">
+			<a class="page-link cgray01" aria-label="Previous" onClick="fn_paging('${pagination.prevPage }')">
 				<span aria-hidden="true">&laquo;</span>
 			</a>			
 		</c:if>
@@ -179,26 +186,29 @@ creating a new future</div>
 	<c:forEach var="pageNum" begin="${pagination.startPage }" end="${pagination.endPage }">
 		<c:choose>
 		<c:when test="${pageNum eq  pagination.curPage}">
-			<li class="page-item"><a class="page-link text-dark active " href="#">${pageNum }</a></li>
+			<li class="page-item"><a class="page-link text-dark active" onClick="fn_paging('${pageNum }')">${pageNum }</a></li>			
 		</c:when>
 		
-		<c:otherwise>
-			<li class="page-item"><a class="page-link text-dark" href="#">${pageNum }</a></li>
+		<c:otherwise>			
+			<li class="page-item"><a class="page-link text-dark" onClick="fn_paging('${pageNum }')">${pageNum }</a></li>
 		</c:otherwise>
 		</c:choose>
 	</c:forEach>
 	
 	<li class="page-item">		
 		<c:if test="${pagination.curRange ne pagination.rangeCnt && pagination.rangeCnt > 0}">
-			<a class="page-link cgray01" href="#" aria-label="Next">
+			<a class="page-link cgray01" aria-label="Next" onClick="fn_paging('${pagination.nextPage }')">
   				<span aria-hidden="true">&raquo;</span>
   			</a>
   		</c:if>
   	</li>
+  	
+  	<li class="page-item">
+	  	<c:if test="${pagination.curRange ne pagination.rangeCnt && pagination.rangeCnt > 0}">
+	        <a href="#" onClick="fn_paging('${pagination.pageCnt }')">[끝]</a> 
+	    </c:if>
+    </li>
 </ul>
-<div>
-   총 게시글 수 : ${pagination.listCnt } /    총 페이지 수 : ${pagination.pageCnt } / 현재 페이지 : ${pagination.curPage } / 현재 블럭 : ${pagination.curRange } / 총 블럭 수 : ${pagination.rangeCnt }
-</div>
 </nav>
 <!-- 본문내용 끝  -->
 

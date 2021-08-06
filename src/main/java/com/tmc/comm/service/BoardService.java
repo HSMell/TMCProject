@@ -122,6 +122,24 @@ public class BoardService implements IBoardService{
 		return boardList;
 	}
 	
+	@Override
+	public List<BoardDto> getBoardList2(BoardDto params) {
+		List<BoardDto> boardList = Collections.emptyList();
+
+		int boardTotalCount = boardDao.selectBoardTotalCount(params);
+		
+		BoardPaginationInfo paginationInfo = new BoardPaginationInfo(params);
+		paginationInfo.setTotalRecordCount(boardTotalCount);
+				
+		params.setPaginationInfo(paginationInfo);
+
+		if (boardTotalCount > 0) {
+			boardList = boardDao.boardList3(params);
+		}
+
+		return boardList;
+	}
+	
 	public int deletePost(String post_num) {
 	      int result = 0;
 	      

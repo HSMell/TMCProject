@@ -31,6 +31,13 @@ $(document).ready(function(){
 	$('#writeBtn').click(function(){
 		location.replace('/notice_write')
 	});
+	
+	$('#searchbtn').click(function(){
+		if($("#search_value").val() == ''){
+			alert("내용을 입력해 주세요");
+			return false;
+		}				
+	});
 });
 </script>
 <body>
@@ -56,9 +63,9 @@ creating a new future</div>
 <form action="/search" method="GET">
 	<div class="p-3 py-md-4 bg-light text-dark rounded">
 		<div class="input-group input_search">  	
-			<input class="form-control" name="search_value" id="search_value" type="text" placeholder="궁금한 점을 검색해 보세요" aria-label="Recipient's username" aria-describedby="button-addon2">
+			<input class="form-control" name="search_value" id="search_value" type="text" placeholder="궁금한 점을 검색해 보세요" aria-label="Recipient's username" aria-describedby="button-addon2" value="${search_value }">
 			<div class="input-group-append">
-				<button class="btn"><img src="img/ico_search.png" alt="" /></button>
+				<button class="btn" id="searchbtn"><img src="img/ico_search.png" alt="" /></button>
 	  		</div>
 	  	</div>
 	</div>
@@ -119,23 +126,6 @@ creating a new future</div>
 
 
 <!-- 공지사항 끝 -->
-<nav aria-label="Page navigation example ">
-<ul class="pagination justify-content-center mt-4">
-  <li class="page-item">
-  <a class="page-link cgray01" href="#" aria-label="Previous">
-  <span aria-hidden="true">&laquo;</span>
-  </a>
-  </li>
-  <li class="page-item"><a class="page-link text-dark active " href="#">1</a></li>
-  <li class="page-item"><a class="page-link text-dark" href="#">2</a></li>
-  <li class="page-item"><a class="page-link text-dark" href="#">3</a></li>
-  <li class="page-item">
-  <a class="page-link cgray01" href="#" aria-label="Next">
-  <span aria-hidden="true">&raquo;</span>
-  </a>
-  </li>
-</ul>
-</nav>
 <!-- 본문내용 끝  -->
 
  

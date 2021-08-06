@@ -23,6 +23,9 @@ public interface IBoardService {
 	
 	public List<BoardDto> getBoardList(BoardDto parms);
 	
+	public List<BoardDto> getBoardList2(BoardDto parms);
+	
+	
 	public BoardDto getPost(@Param("post_num") String post_num);
 	
 	public int deletePost(@Param("post_num") String post_num);

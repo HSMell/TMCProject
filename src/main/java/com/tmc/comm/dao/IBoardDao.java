@@ -49,6 +49,7 @@ public interface IBoardDao {
 	
 	public List<BoardDto> getFileList(@Param("post_num") String post_num);
 
+	public List<BoardDto> boardList3(BoardDto params);
 
-	
+	public List<BoardDto> boardList4(Pagination params);
 }
